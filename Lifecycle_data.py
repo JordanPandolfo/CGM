@@ -1,0 +1,90 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Nov 21 10:53:07 2017
+
+@author: jordan
+"""
+import numpy as np
+
+survprob = np.zeros((80,1))
+survprob[0,0]= 0.000726    #At 20, prbbaility of alive at 21
+survprob[1,0]= 0.000806
+survprob[2,0]= 0.000868
+survprob[3,0]= 0.000905
+survprob[4,0]= 0.000924
+survprob[5,0]= 0.000939
+survprob[6,0]= 0.000957
+survprob[7,0]= 0.000977
+survprob[8,0]= 0.001002
+survprob[9,0]= 0.001030
+survprob[10,0]= 0.001061
+survprob[11,0]= 0.001094
+survprob[12,0]= 0.001127
+survprob[13,0]= 0.001161
+survprob[14,0]= 0.001200
+survprob[15,0]= 0.001251
+survprob[16,0]= 0.001317
+survprob[17,0]= 0.001394
+survprob[18,0]= 0.001480
+survprob[19,0]= 0.001575
+survprob[20,0]= 0.001680
+survprob[21,0]= 0.001802
+survprob[22,0]= 0.001950
+survprob[23,0]= 0.002130
+survprob[24,0]= 0.002344
+survprob[25,0]= 0.002575
+survprob[26,0]= 0.002824
+survprob[27,0]= 0.003112
+survprob[28,0]= 0.003437
+survprob[29,0]= 0.003787
+survprob[30,0]= 0.004146
+survprob[31,0]= 0.004509
+survprob[32,0]= 0.004884
+survprob[33,0]= 0.005282
+survprob[34,0]= 0.005708
+survprob[35,0]= 0.006167
+survprob[36,0]= 0.006651
+survprob[37,0]= 0.007156
+survprob[38,0]= 0.007673
+survprob[39,0]= 0.008210
+survprob[40,0]= 0.008784
+survprob[41,0]= 0.009408
+survprob[42,0]= 0.010083
+survprob[43,0]= 0.010819
+survprob[44,0]= 0.011628
+survprob[45,0]= 0.012530
+survprob[46,0]= 0.013534
+survprob[47,0]= 0.014658
+survprob[48,0]= 0.015888
+survprob[49,0]= 0.017236
+survprob[50,0]= 0.018831
+survprob[51,0]= 0.020693
+survprob[52,0]= 0.022723
+survprob[53,0]= 0.024884
+survprob[54,0]= 0.027216
+survprob[55,0]= 0.029822
+survprob[56,0]= 0.032876
+survprob[57,0]= 0.036328
+survprob[58,0]= 0.040156
+survprob[59,0]= 0.044699
+survprob[60,0]= 0.049419
+survprob[61,0]= 0.054529
+survprob[62,0]= 0.060341
+survprob[63,0]= 0.067163
+survprob[64,0]= 0.074785
+survprob[65,0]= 0.083577
+survprob[66,0]= 0.093319
+survprob[67,0]= 0.103993
+survprob[68,0]= 0.115643
+survprob[69,0]= 0.128300
+survprob[70,0]= 0.141986
+survprob[71,0]= 0.156706
+survprob[72,0]= 0.172451
+survprob[73,0]= 0.189191
+survprob[74,0]= 0.206875
+survprob[75,0]= 0.225433
+survprob[76,0]= 0.244768
+survprob[77,0]= 0.264767
+survprob[78,0]= 0.285296
+survprob[79,0]= 0.306203     #At 99, probability of alive at 100
+survprob = np.ones(80)-survprob[:,0]
