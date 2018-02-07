@@ -1,7 +1,3 @@
-"""
-@author: pando004
-"""
-
 #-------------------------------#
 #                               #
 #   Import Packages and Data    #
@@ -32,7 +28,6 @@ f = lambda r: norm.pdf(r,mu,sigr)
 
 #Distribution of working period stochastic processess
 F = lambda r,eps: multivariate_normal.pdf(np.array((r,eps)),mean,cov)
-
 
 delta    = 0.96
 gamma    = 10
@@ -163,7 +158,6 @@ def Vp_Working(x,a,c,pi,Interp,age):
     
     return -(utility + discount*expected_value)
 
-
 #-----------------#
 #                 #
 #   Initialize    #
@@ -184,24 +178,22 @@ V[T-1] = (x_grid)**(1-gamma)/(1-gamma)
 for age in range(T-1,-1,-1): #For each age 79 to 0
 
     #Create interpolation of next-period value function
-    #Vp_interp = interp(np.log(x_grid),V[age],kind='linear',fill_value='extrapolate',bounds_error=False )
     Vp_interp = interp(np.log(x_grid),V[age],kind='cubic',fill_value=(np.min(V[age]),np.max(V[age])),bounds_error=False )
 
     for ix, x in enumerate(x_grid):  #For each cash-in-hand value
         print('Age',age+20,'and grid point',ix)
         
-        bounds = [(0,1.0),(0,x.copy() )]
+        bounds = [(0,1.0),(0,x.copy() )]   #constraints
                 
         if age >= 44:    #If retired
         
-            Vp_value_temp = lambda z: Vp_Retired(x,z[0],z[1],p.survprob[age],Vp_interp)
-            
+            Vp_value_temp = lambda z: Vp_Retired(x,z[0],z[1],p.survprob[age],Vp_interp)        
             
             if age == T-1:
                 inits = (.5,x/2) 
             else:
                 inits = (A[age,ix],C[age,ix])
-             #tol=.0000001
+            
             solution = differential_evolution(Vp_value_temp,bounds,tol=.0000001,maxiter=1000000)
             
         if age < 44:    #If working
@@ -209,13 +201,12 @@ for age in range(T-1,-1,-1): #For each age 79 to 0
             Vp_value_temp = lambda z: Vp_Working(x,z[0],z[1],p.survprob[age],Vp_interp,age+20)
 
             inits = (A[age,ix],C[age,ix])
+            
             solution = differential_evolution(Vp_value_temp,bounds,tol=.0000001,maxiter=1000000)
-
-        print(solution.message)
         
-        A[age-1,ix] = solution.x[0]
-        C[age-1,ix] = solution.x[1]
-        V[age-1,ix] = -Vp_value_temp(solution.x)
+        A[age-1,ix] = solution.x[0]  #save investment decision
+        C[age-1,ix] = solution.x[1]  #save consumption decision
+        V[age-1,ix] = -Vp_value_temp(solution.x) #value function value
 
 #------------------------------#
 #                              #
